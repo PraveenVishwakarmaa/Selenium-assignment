@@ -1,0 +1,180 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-08-27T10:42:03.462Z",
+    "end": "2024-08-27T10:42:11.163Z",
+    "duration": 7701,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "85c1374c-531b-4af9-b0d9-4bfb78ff86e8",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e6c58b06-318e-4778-babd-055c818b7d7e",
+          "title": "Valid Test case",
+          "fullFile": "C:\\Users\\pintu\\OneDrive\\Documents\\assignment\\test\\postiveTest.js",
+          "file": "\\test\\postiveTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "With both valid credientials",
+              "fullTitle": "Valid Test case With both valid credientials",
+              "timedOut": null,
+              "duration": 3160,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Launching the browser\nconst driver = await new Builder().forBrowser(\"chrome\").build();\n// Maximise the window\nawait driver.manage().window().maximize();\ntry {\n  // Open the web page\n  await driver.get(\"https://sakshingp.github.io/assignment/login.html\");\n  // Navigating the Username and Password field and login button\n  const usernameField = await driver.findElement(By.id(\"username\"));\n  const passwordField = await driver.findElement(By.id(\"password\"));\n  const loginButton = await driver.findElement(By.id(\"log-in\"));\n  // Entering the Username and password\n  await usernameField.sendKeys(\"admin\");\n  await passwordField.sendKeys(\"admin\");\n  // Clicking the login button\n  await loginButton.click();\n  // Wait for specific element on the home page to ensure successful login\n  const specificElement = By.id(\"showExpensesChart\");\n  await driver.wait(until.elementLocated(specificElement), 10000);\n  await driver.findElement(specificElement);\n  const isPresent = await driver.findElement(specificElement).isDisplayed();\n  assert.strictEqual(\n    isPresent,\n    true,\n    \"Element is not present on the page.\"\n  );\n  console.log(\"Element is present on the page.\");\n  \n  // Check if the array is sorted in Ascending order\n  const isSortedAsc = (array) => {\n    for (let i = 1; i < array.length; i++) {\n      if (array[i - 1] > array[i]) {\n        return false;\n      }\n    }\n    return true;\n  };\n  // Check if the array is sorted in Descending order\n  const isSortedDes = (array) => {\n    for (let i = 1; i < array.length; i++) {\n      if (array[i - 1] < array[i]) {\n        return false;\n      }\n    }\n    return true;\n  };\n  // Extracting the value from the elements\n  const extractingAmount = async () => {\n    // Locating the all elements of amount table\n    let elementLocator = By.css(\".text-right span\");\n    let elements = await driver.findElements(elementLocator);\n    let values = await Promise.all(\n      elements.map(async (element) => await element.getText())\n    );\n    return await Promise.all(\n      values.map(async (value) => parseFloat(value.replace(/[A-Z, ]/g, \"\")))\n    );\n  };\n  // Locating the AMOUNT header and clicking\n  let amountHeader = await driver.findElement(By.id(\"amount\"));\n  await amountHeader.click();\n  // Extracting the amount\n  let amountList = await extractingAmount();\n  // Checking the value is sorted in Ascending Order\n  if (isSortedAsc(amountList)) {\n    console.log(\"Amount sorted in Ascending order\");\n    console.log(amountList);\n  } else {\n    throw new Error();\n  }\n  //  Clicking again in amount header\n  await amountHeader.click();\n  // Extracting the amount\n  amountList = await extractingAmount();\n  // Checking the value is sorted in Descending Order\n  if (isSortedDes(amountList)) {\n    console.log(\"Amount sorted in Descending order\");\n    console.log(amountList);\n  } else {\n    throw new Error();\n  }\n  console.log(\"Success\");\n} catch (error) {\n  console.log(\"An Error occured:\" + error);\n} finally {\n  //   Closing the browser\n  await driver.quit();\n}",
+              "err": {},
+              "uuid": "bb7e7a79-9431-451c-8dc8-a92045447b75",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bb7e7a79-9431-451c-8dc8-a92045447b75"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3160,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "85a4e006-2f3e-4196-a8f9-714b4d9b3ff2",
+          "title": "Invalid Test case",
+          "fullFile": "C:\\Users\\pintu\\OneDrive\\Documents\\assignment\\test\\negativeTest.js",
+          "file": "\\test\\negativeTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "With valid username and invalid password",
+              "fullTitle": "Invalid Test case With valid username and invalid password",
+              "timedOut": null,
+              "duration": 2686,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Lauching the browser\nconst driver = await new Builder().forBrowser(\"chrome\").build();\n// Maximise the window\nawait driver.manage().window().maximize();\ntry {\n  // Open the web page\n  await driver.get(\"https://sakshingp.github.io/assignment/login.html\");\n  // Navigating the Username field and login button\n  const usernameField = await driver.findElement(By.id(\"username\"));\n  const loginButton = await driver.findElement(By.id(\"log-in\"));\n  // Entering the Username\n  await usernameField.sendKeys(\"admin\");\n  // Clicking the login button\n  await loginButton.click();\n  // Locating and checking the alert is displaying or not\n  let message = await driver.findElement(\n    By.xpath(\"/html/body/div/div/div[3]\")\n  );\n  if (message.isEnabled()) {\n    console.log(\"Message is Visible now!\");\n  } else {\n    throw new Error();\n  }\n} catch (error) {\n  console.log(\"An Error occured:\" + error);\n} finally {\n  //   Closing the browser\n  await driver.quit();\n}",
+              "err": {},
+              "uuid": "ee7d60c2-cff0-4b52-84e4-f2979059f8d6",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "With invalid username and valid password",
+              "fullTitle": "Invalid Test case With invalid username and valid password",
+              "timedOut": null,
+              "duration": 2540,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Lauching the browser\nconst driver = await new Builder().forBrowser(\"chrome\").build();\n// Maximise the window\nawait driver.manage().window().maximize();\ntry {\n  // Open the web page\n  await driver.get(\"https://sakshingp.github.io/assignment/login.html\");\n  // Navigating the Password field and login button\n  const passwordField = await driver.findElement(By.id(\"password\"));\n  const loginButton = await driver.findElement(By.id(\"log-in\"));\n  // Entering the Password\n  await passwordField.sendKeys(\"admin\");\n  // Clicking the login button\n  await loginButton.click();\n  // Locating and checking the alert is displaying or not\n  let message = await driver.findElement(\n    By.xpath(\"/html/body/div/div/div[3]\")\n  );\n  if (message.isEnabled()) {\n    console.log(\"Message is Visible now!\");\n  } else {\n    throw new Error();\n  }\n} catch (error) {\n  console.log(\"An Error occured:\" + error);\n} finally {\n  //   Closing the browser\n  await driver.quit();\n}",
+              "err": {},
+              "uuid": "acf824f0-1f76-4d05-89f2-c7f41c70fd83",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "With invalid username and invalid password",
+              "fullTitle": "Invalid Test case With invalid username and invalid password",
+              "timedOut": null,
+              "duration": 2083,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Lauching the browser\nconst driver = await new Builder().forBrowser(\"chrome\").build();\n// Maximise the window\nawait driver.manage().window().maximize();\ntry {\n  // Open the web page\n  await driver.get(\"https://sakshingp.github.io/assignment/login.html\");\n  // Navigating login button\n  const loginButton = await driver.findElement(By.id(\"log-in\"));\n  // Clicking the login button\n  await loginButton.click();\n  // Locating and checking the alert is displaying or not\n  let message = await driver.findElement(\n    By.xpath(\"/html/body/div/div/div[3]\")\n  );\n  if (message.isEnabled()) {\n    console.log(\"Message is Visible now!\");\n  } else {\n    throw new Error();\n  }\n} catch (error) {\n  console.log(\"An Error occured:\" + error);\n} finally {\n  //   Closing the browser\n  await driver.quit();\n}",
+              "err": {},
+              "uuid": "258bfd9f-bcd7-4cb9-b0ea-5efe0585504e",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ee7d60c2-cff0-4b52-84e4-f2979059f8d6",
+            "acf824f0-1f76-4d05-89f2-c7f41c70fd83",
+            "258bfd9f-bcd7-4cb9-b0ea-5efe0585504e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7309,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.7.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "test-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "/Users/pintu/OneDrive/Documents/assignment/test-reports/",
+        "reportFilename": "test-report"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

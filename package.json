@@ -1,0 +1,19 @@
+{
+  "name": "wingyfy-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --no-timeouts --parallel --reporter mochawesome --require mochawesome/register --reporter-option reportDir=/Users/pintu/OneDrive/Documents/assignment/test-reports/,reportFilename=test-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^2.1.0",
+    "chromedriver": "^128.0.0",
+    "mocha": "^10.7.3",
+    "mochawesome": "^7.1.3",
+    "selenium-webdriver": "^4.23.0"
+  }
+}
